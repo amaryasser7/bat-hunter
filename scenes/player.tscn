@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4ifmw3olw6p8"]
+
+[ext_resource type="PackedScene" uid="uid://chjrhhjvxun3r" path="res://asstes/player/simple_gun/gun_model.glb" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://dlkbdwtnau65a" path="res://scripts/player.tres.gd" id="1_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://cuyh8hew637ju" path="res://asstes/player/reticle.png" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://bi6ansiu0g7gi" path="res://asstes/player/gun_shoot.wav" id="4_dqkch"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kqu6x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_qhqgy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0480812, 1.00341, 0)
+mesh = SubResource("CapsuleMesh_kqu6x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0421397, 0.991439, -0.0181873)
+shape = SubResource("CapsuleShape3D_kqu6x")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59851, 0)
+
+[node name="gun_model" parent="Camera3D" instance=ExtResource("1_oul6g")]
+transform = Transform3D(-0.301972, 0, -0.0165815, 0, 0.302427, 0, 0.0165815, 0, -0.301972, 0.516841, -0.187667, -0.540149)
+
+[node name="Marker3D" type="Marker3D" parent="Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00379109, -0.0720037, -0.731878)
+
+[node name="Reticle" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0001
+offset_top = -36.0001
+offset_right = 116.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.495125, 0.485416)
+texture = ExtResource("3_qhqgy")
+expand_mode = 1
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_dqkch")

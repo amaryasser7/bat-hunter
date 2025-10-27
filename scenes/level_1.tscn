@@ -1,0 +1,439 @@
+[gd_scene load_steps=13 format=3 uid="uid://b2qpo1i2n8665"]
+
+[ext_resource type="PackedScene" uid="uid://csqxeq7wqq3hl" path="res://scenes/mob_spawner_3d.tscn" id="1_4nkto"]
+[ext_resource type="PackedScene" uid="uid://b4ifmw3olw6p8" path="res://scenes/player.tscn" id="1_014kd"]
+[ext_resource type="Texture2D" uid="uid://bos7rridjkps1" path="res://asstes/level/checkboard.png" id="1_bswci"]
+[ext_resource type="Script" uid="uid://b8fpj1818xoyv" path="res://scripts/level_1.gd" id="1_fcfvj"]
+[ext_resource type="Material" uid="uid://euncmrgn0mo6" path="res://scenes/bridge.tres" id="1_rus8k"]
+[ext_resource type="PackedScene" uid="uid://bxhxdkq7xb65d" path="res://scenes/Tree.tscn" id="2_5xbjy"]
+[ext_resource type="PackedScene" uid="uid://c4fhr33iylmfm" path="res://scenes/Tree_dark_green.tscn" id="5_15mv3"]
+[ext_resource type="PackedScene" uid="uid://c0oc865gugvsh" path="res://scenes/tree_light_green.tscn" id="6_e3sih"]
+
+[sub_resource type="Environment" id="Environment_5xbjy"]
+background_mode = 1
+background_color = Color(0.285791, 0.754584, 0.96814, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.809794, 0.728323, 0.724542, 1)
+fog_enabled = true
+fog_light_color = Color(0.221832, 0.558397, 0.887723, 1)
+fog_height = 0.5
+fog_height_density = 0.15
+
+[sub_resource type="LabelSettings" id="LabelSettings_4nkto"]
+font_size = 56
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_15mv3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rus8k"]
+albedo_color = Color(0.0967863, 0.616039, 0.398913, 1)
+albedo_texture = ExtResource("1_bswci")
+uv1_triplanar = true
+
+[node name="Level_1" type="Node3D"]
+script = ExtResource("1_fcfvj")
+
+[node name="Player" parent="." groups=["killzone"] instance=ExtResource("1_014kd")]
+transform = Transform3D(0.0206109, 0, -0.999788, 0, 1, 0, 0.999788, 0, 0.0206109, -1.25768, 0, 0.0346775)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.636226, 0.771502, 0, -0.771502, 0.636226, 0, 10.384, 7.67631)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5xbjy")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 29.0
+offset_top = 25.0
+offset_right = 241.0
+offset_bottom = 102.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_4nkto")
+
+[node name="Kill_Zone" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Kill_Zone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.63064, 0)
+shape = SubResource("WorldBoundaryShape3D_15mv3")
+
+[node name="MobSpawners" type="Node3D" parent="."]
+
+[node name="MobSpawner3D" parent="MobSpawners" instance=ExtResource("1_4nkto")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.2357, 0.878, 0.340045)
+
+[node name="MobSpawner3D2" parent="MobSpawners" instance=ExtResource("1_4nkto")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1189, 0.878, -65.9811)
+
+[node name="MobSpawner3D3" parent="MobSpawners" instance=ExtResource("1_4nkto")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.633, 0.878, 64.0007)
+
+[node name="MobSpawner3D4" parent="MobSpawners" instance=ExtResource("1_4nkto")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.1785, 0.878, 35.395)
+
+[node name="MobSpawner3D5" parent="MobSpawners" instance=ExtResource("1_4nkto")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.1785, 0.878, -32.0806)
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="Tree" parent="Trees" instance=ExtResource("2_5xbjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.0511, 0.0320655, 45.4233)
+
+[node name="Tree_dark_green" parent="Trees" instance=ExtResource("5_15mv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.0299, 0.0320655, 21.2551)
+
+[node name="Tree_light_green" parent="Trees" instance=ExtResource("6_e3sih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.0929, 0.0320655, 28.4456)
+
+[node name="Tree2" parent="Trees" instance=ExtResource("2_5xbjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.9624, 0.0320646, 4.00951)
+
+[node name="Tree3" parent="Trees" instance=ExtResource("2_5xbjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.8996, 0.0320655, -45.3825)
+
+[node name="Tree_dark_green2" parent="Trees" instance=ExtResource("5_15mv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.2143, 0.0320675, -23.1297)
+
+[node name="Tree_light_green2" parent="Trees" instance=ExtResource("6_e3sih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78.2288, 0.0320694, -37.787)
+
+[node name="Tree_light_green3" parent="Trees" instance=ExtResource("6_e3sih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3794, 0.0320655, -43.6121)
+
+[node name="Tree4" parent="Trees" instance=ExtResource("2_5xbjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9906, 0.0444671, -70.8389)
+
+[node name="Tree_dark_green3" parent="Trees" instance=ExtResource("5_15mv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.1852, 0.0444652, -70.7064)
+
+[node name="Tree_light_green4" parent="Trees" instance=ExtResource("6_e3sih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.043, 0.0444652, -58.224)
+
+[node name="Tree5" parent="Trees" instance=ExtResource("2_5xbjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19289, 0.0320655, -47.2109)
+
+[node name="Tree_dark_green4" parent="Trees" instance=ExtResource("5_15mv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6998, 0.0320655, -17.3037)
+
+[node name="Tree6" parent="Trees" instance=ExtResource("2_5xbjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9997, 0.0320655, 48.3193)
+
+[node name="Tree7" parent="Trees" instance=ExtResource("2_5xbjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6062, 0.129607, 69.4641)
+
+[node name="Tree8" parent="Trees" instance=ExtResource("2_5xbjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.7491, 0.129607, 57.9062)
+
+[node name="Tree_dark_green5" parent="Trees" instance=ExtResource("5_15mv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.1975, 0.129604, 68.5763)
+
+[node name="Tree_light_green5" parent="Trees" instance=ExtResource("6_e3sih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.2023, 0.129605, 58.5481)
+
+[node name="Tree9" parent="Trees" instance=ExtResource("2_5xbjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.6824, -0.00887474, 16.4949)
+
+[node name="Tree_dark_green6" parent="Trees" instance=ExtResource("5_15mv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.8849, -0.00887474, 14.4185)
+
+[node name="Tree_light_green6" parent="Trees" instance=ExtResource("6_e3sih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.7033, -0.00887474, -13.279)
+
+[node name="Tree_light_green7" parent="Trees" instance=ExtResource("6_e3sih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.7051, -0.00887569, -12.2898)
+
+[node name="Tree10" parent="Trees" instance=ExtResource("2_5xbjy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.889692, 0.0320655, 18.6693)
+
+[node name="Tree_dark_green7" parent="Trees" instance=ExtResource("5_15mv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5377, 0.0320675, 33.1432)
+
+[node name="Tree_light_green8" parent="Trees" instance=ExtResource("6_e3sih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.33268, 0.0320675, 25.4441)
+
+[node name="Ground" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.288673, 0, -0.0567131)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6509, -0.569812, 0.0127478)
+use_collision = true
+size = Vector3(15.291, 1.11279, 4.15918)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.1357, -0.569812, 0.0127478)
+use_collision = true
+size = Vector3(22.0353, 1.11279, 4.37793)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98307, -0.419345, 13.2869)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 3.18909)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98307, -0.419345, 8.52637)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 3.18909)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98307, -0.419345, -7.6643)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 3.18909)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98307, -0.419345, -11.9389)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 3.18909)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0402, -0.419345, -11.9389)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 3.18909)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.0834, -0.419345, -7.52458)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 3.18909)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.8027, -0.419345, 7.73268)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 3.18909)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.7405, -0.419345, 13.3857)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 3.18909)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.7405, -0.212493, 60.1301)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 1.99103)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.8192, -0.0812519, 56.54)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 1.99103)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.3457, -0.122657, 65.5441)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 6.9606)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.5528, -0.118014, 65.5441)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 6.9606)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.8398, -0.171379, 65.5441)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 6.9606)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1106, -0.205806, 65.5441)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 6.9606)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.8182, -0.15377, 65.6285)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 6.79985)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D41" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(-0.999937, 0, 0.0112223, 9.81276e-05, -0.999962, 0.00874343, 0.0112219, 0.00874398, 0.999899, -4.46817, -0.5287, 58.0725)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 1.99103)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D42" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(-0.999937, 0, 0.0112223, 9.81276e-05, -0.999962, 0.00874343, 0.0112219, 0.00874398, 0.999899, -4.57908, -0.551146, 54.6273)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 1.99103)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D43" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(-0.999937, 0, 0.0112223, 9.81276e-05, -0.999962, 0.00874343, 0.0112219, 0.00874398, 0.999899, 7.3477, -0.64836, 63.5808)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 6.9606)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D44" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(-0.999937, 0, 0.0112223, 9.81276e-05, -0.999962, 0.00874343, 0.0112219, 0.00874398, 0.999899, 3.12045, -0.630277, 63.6282)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 6.9606)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D45" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(-0.999937, 0, 0.0112223, 9.81276e-05, -0.999962, 0.00874343, 0.0112219, 0.00874398, 0.999899, 11.2, -0.641369, 63.4704)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 6.9606)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D47" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(-0.999937, 0, 0.0112223, 9.81276e-05, -0.999962, 0.00874343, 0.0112219, 0.00874398, 0.999899, -4.47733, -0.526337, 63.7979)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 6.79985)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D27" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.999518, 0, -0.0310619, -0.000333945, -0.999942, -0.0107458, -0.0310601, 0.010751, -0.99946, 71.9451, -0.534509, -55.0784)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 1.99103)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.999518, 0, -0.0310619, -0.000333945, -0.999942, -0.0107458, -0.0310601, 0.010751, -0.99946, 72.0124, -0.551592, -51.1456)
+use_collision = true
+size = Vector3(10.1591, 1.11279, 1.99103)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D29" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.999518, 0, -0.0310619, -0.000333945, -0.999942, -0.0107458, -0.0310601, 0.010751, -0.99946, 59.8054, -0.691129, -61.9497)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 8.54618)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D30" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.999518, 0, -0.0310619, -0.000333945, -0.999942, -0.0107458, -0.0310601, 0.010751, -0.99946, 63.9093, -0.670528, -62.1007)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 8.5695)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D31" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.999518, 0, -0.0310619, -0.000333945, -0.999942, -0.0107458, -0.0310601, 0.010751, -0.99946, 55.7214, -0.568269, -61.8703)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 8.24259)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D32" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.999518, 0, -0.0310619, -0.000333945, -0.999942, -0.0107458, -0.0310601, 0.010751, -0.99946, 51.7994, -0.61961, -61.8266)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 8.28401)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D33" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.999518, 0, -0.0310619, -0.000333945, -0.999942, -0.0107458, -0.0310601, 0.010751, -0.99946, 71.5074, -0.694589, -62.2942)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 8.56606)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D34" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.00631984, 0.0107434, -0.999922, -0.000333945, -0.999942, -0.0107458, -0.99998, 0.000401832, -0.00631588, 3.36255, -0.284871, -68.4103)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 1.99103)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D35" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.00631984, 0.0107434, -0.999922, -0.000333945, -0.999942, -0.0107458, -0.99998, 0.000401832, -0.00631588, 7.29508, -0.301954, -68.3307)
+use_collision = true
+size = Vector3(10.1591, 1.11279, 1.99103)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D39" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.00631984, 0.0107434, -0.999922, -0.000333945, -0.999942, -0.0107458, -0.99998, 0.000401832, -0.00631588, 10.5548, -0.301954, -68.3307)
+use_collision = true
+size = Vector3(10.1591, 1.11279, 1.99103)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D36" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.00631984, 0.0107434, -0.999922, -0.000333945, -0.999942, -0.0107458, -0.99998, 0.000401832, -0.00631588, -3.95773, -0.44149, -56.536)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 8.54618)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D37" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.00631984, 0.0107434, -0.999922, -0.000333945, -0.999942, -0.0107458, -0.99998, 0.000401832, -0.00631588, -3.95517, -0.420888, -60.6426)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 8.5695)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D38" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.00631984, 0.0107434, -0.999922, -0.000333945, -0.999942, -0.0107458, -0.99998, 0.000401832, -0.00631588, -4.03104, -0.31863, -52.4519)
+use_collision = true
+size = Vector3(2.68848, 1.11279, 8.24259)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D40" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.00631984, 0.0107434, -0.999922, -0.000333945, -0.999942, -0.0107458, -0.99998, 0.000401832, -0.00631588, -3.86455, -0.44495, -68.2427)
+use_collision = true
+size = Vector3(9.76343, 1.11279, 8.56606)
+material = ExtResource("1_rus8k")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.76268, -4.99002, 0.0453339)
+use_collision = true
+size = Vector3(17.5166, 10, 10)
+material = SubResource("StandardMaterial3D_rus8k")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.8834, -4.99002, 0.0453339)
+use_collision = true
+size = Vector3(17.5166, 10, 10)
+material = SubResource("StandardMaterial3D_rus8k")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.83861, -4.99002, -32.5841)
+use_collision = true
+size = Vector3(17.6685, 10, 34.7324)
+material = SubResource("StandardMaterial3D_rus8k")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.1501, -4.99002, -31.6884)
+use_collision = true
+size = Vector3(17.6685, 10, 34.7324)
+material = SubResource("StandardMaterial3D_rus8k")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.0123043, 0, -0.999924, 0, 1, 0, 0.999924, 0, 0.0123043, 30.195, -4.24471, -65.3544)
+use_collision = true
+size = Vector3(17.6685, 8.53418, 34.7324)
+material = SubResource("StandardMaterial3D_rus8k")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.0123043, 0, -0.999924, 0, 1, 0, 0.999924, 0, 0.0123043, 30.195, -4.89248, 61.9007)
+use_collision = true
+size = Vector3(17.6685, 10, 34.7324)
+material = SubResource("StandardMaterial3D_rus8k")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.0123043, 0, -0.999924, 0, 1, 0, 0.999924, 0, 0.0123043, 30.195, -5.03096, 0.375057)
+use_collision = true
+size = Vector3(35.0752, 10, 19.8115)
+material = SubResource("StandardMaterial3D_rus8k")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.83861, -4.99002, 34.2302)
+use_collision = true
+size = Vector3(17.6685, 10, 34.7324)
+material = SubResource("StandardMaterial3D_rus8k")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.9729, -4.99002, 35.7423)
+use_collision = true
+size = Vector3(17.6685, 10, 34.7324)
+material = SubResource("StandardMaterial3D_rus8k")
+
+[connection signal="body_entered" from="Kill_Zone" to="." method="_on_kill_zone_body_entered"]
+[connection signal="mob_spawned" from="MobSpawners/MobSpawner3D" to="." method="_on_mob_spawner_3d_mob_spawned"]
+[connection signal="mob_spawned" from="MobSpawners/MobSpawner3D2" to="." method="_on_mob_spawner_3d_2_mob_spawned"]
+[connection signal="mob_spawned" from="MobSpawners/MobSpawner3D3" to="." method="_on_mob_spawner_3d_3_mob_spawned"]
+[connection signal="mob_spawned" from="MobSpawners/MobSpawner3D4" to="." method="_on_mob_spawner_3d_4_mob_spawned"]
+[connection signal="mob_spawned" from="MobSpawners/MobSpawner3D5" to="." method="_on_mob_spawner_3d_5_mob_spawned"]
